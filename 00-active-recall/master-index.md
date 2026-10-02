@@ -98,6 +98,15 @@ last_reviewed: 2026-10-02
 
 ## 🗄️ Database & Concurrency Architecture
 
+### Prisma ORM & Data Access (`database/prisma/`)
+
+#### [[database/prisma/prisma_fundamentals|Prisma ORM: Architecture, Lifecycle & Production Mind Map]]
+- [ ] What is the exact role difference between `prisma` (devDependencies) and `@prisma/client` (dependencies)?
+- [ ] What happens under the hood when you run `npx prisma migrate dev` vs `npx prisma generate`?
+- [ ] Why does creating multiple `new PrismaClient()` instances crash PostgreSQL with connection starvation, and how does the singleton pattern prevent it?
+- [ ] Why must `prisma migrate dev` NEVER be run in production CI/CD or Docker entrypoint scripts, and what command replaces it?
+- [ ] How does Prisma Client dynamically translate type-safe JavaScript query methods into parameterized raw SQL queries at runtime?
+
 ### PostgreSQL & Relational (`database/postgresql/`)
 
 #### [[database/postgresql/transactions-and-pessimistic-locking|PostgreSQL Concurrency Control: ACID Transactions & Pessimistic Locking (FOR UPDATE)]]
