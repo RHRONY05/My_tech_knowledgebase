@@ -286,14 +286,38 @@ last_reviewed: 2026-10-02
 
 ## 🔷 TypeScript & Runtime Safety
 
-### TypeScript Core (`typescript/core/`)
+### 1. TypeScript Core Fundamentals
 
-#### [[typescript/core/typescript-contracts-and-generics|TypeScript Core Contracts, Compilation & Generics]]
-- [ ] What is **Type Erasure**, and why do TypeScript interfaces and type annotations occupy exactly 0 bytes in runtime JavaScript?
-- [ ] Why does runtime JavaScript fail with silent data corruption (e.g. `"85" + 15 === "8515"`), and how does compile-time static analysis prevent it?
-- [ ] What is the architectural difference between `interface` and `type`, and when should you choose one over the other?
-- [ ] Why is `any` strictly banned in production codebases, and how does `unknown` enforce defensive type narrowing?
-- [ ] How do Generics (`<T>`) enable reusable data envelopes like `ApiResponse<T>` without sacrificing type safety?
+#### Topics to Recall:
+1. **Static Typing vs. Dynamic Typing:** Compile-time check (`tsc`) vs. runtime evaluation (V8 / Node.js).
+2. **Type Erasure & Transpilation:** Why types occupy 0 bytes in compiled JavaScript and why types cannot be accessed as runtime values.
+3. **`tsconfig.json` Core Directives:** What `target`, `module`, `strict`, `rootDir`, and `outDir` instruct the compiler to do.
+4. **Primitive Types:** Annotating `string`, `number`, `boolean`, `null`, and `undefined`.
+5. **Type Inference:** When TypeScript automatically detects the type vs. when to write explicit annotations.
+6. **Arrays vs. Tuples:** Open-ended typed lists (`number[]`) vs. fixed-length and fixed-order pairs (`[number, string]`).
+7. **Object Data Contracts (`interface` vs. `type`):** When to use each, extending interfaces, and defining contracts for entities.
+8. **Immutability & Optionality:** `readonly` properties (preventing reassignment) and optional properties (`?`).
+9. **Function Signatures:** Parameter typing, explicit return types, and the `void` return type.
+10. **Typing Function Callbacks:** The `(param: Type) => ReturnType` signature and passing functions as arguments.
+11. **Asynchronous TypeScript:** `Promise<T>`, why all `async` functions return a `Promise`, and checking for `null` before property access.
+12. **Generics Demystified (`<T>`):** Type parameters as placeholders, avoiding `any`, and building reusable shapes like `ApiResponse<T>`.
+13. **Literal Union Types:** Enforcing exact string or number options (`"HOME" | "AWAY"`) instead of broad types.
+14. **Defensive Typing & Narrowing:** Why `any` is banned, using `unknown`, and narrowing with `typeof` and `in`.
+
+👉 **Detailed Study Note:** [[typescript/core/typescript_basics|typescript_basics.md]]
+
+---
+
+### 2. TypeScript Compilation & Multi-tsconfig Architecture
+
+#### Topics to Recall:
+1. **No Runtime Execution:** Why neither Node.js nor web browsers execute TypeScript directly; all code must become plain JS.
+2. **Backend vs. Frontend Conversion:** Why `tsc` emits `dist/*.js` for backend, while Vite bundles `dist/` and `tsc` only type-checks (`noEmit: true`) for frontend.
+3. **`tsc` In-Memory Checking vs Type Erasure:** Why types stay active in AST memory during checking and are erased only during code emission.
+4. **Why Multiple Configs:** Why backend needs only 1 `tsconfig.json`, while frontend requires 3 files (`tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`) to isolate Browser DOM from Node.js build scripts.
+5. **The 3 Error Watchers Timeline:** Editor Language Server (`tsserver`) while typing $\rightarrow$ Vite Dev Server (`esbuild`) during dev $\rightarrow$ `tsc -b` during production build.
+
+👉 **Detailed Study Note:** [[typescript/core/tsconfig_conecpts|tsconfig_conecpts.md]]
 
 ### Zod (`typescript/zod/`)
 
