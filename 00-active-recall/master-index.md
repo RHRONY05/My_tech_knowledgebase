@@ -181,6 +181,17 @@ last_reviewed: 2026-10-02
 - [ ] In Docker Compose, why can containers communicate via service names (`redis:6379`) while the host connects via `localhost:6379`?
 - [ ] Why does vector similarity search for AI embeddings require `pgvector/pgvector:pg16` instead of standard `postgres:16`?
 
+### pgvector & AI Embeddings (`database/pgvector/`)
+
+#### [[database/pgvector/vector_embeddings_and_search|Vector Embeddings & Semantic Search: Production Cheat Sheet & Mental Model]]
+- [ ] Why does traditional SQL keyword search (`ILIKE '%red%'`) fail when users search with natural, descriptive language?
+- [ ] What is a vector embedding, and why does AI use 768 dimensions instead of 2D or 3D?
+- [ ] Who actually performs the search: the Gemini AI model or PostgreSQL?
+- [ ] What is the difference between an Embedding Model (produces numbers) and a Chat Model (produces text)?
+- [ ] What does Cosine Distance measure, what does a lower vs higher distance value mean in practice, and why do we subtract it from 1 to get a similarity score?
+- [ ] What is an HNSW index, and what happens to search performance without one on a large dataset?
+- [ ] When a user sends a long prompt to ChatGPT, does the entire prompt become one vector or is it processed differently?
+
 ---
 
 ## 🐳 DevOps & Infrastructure
