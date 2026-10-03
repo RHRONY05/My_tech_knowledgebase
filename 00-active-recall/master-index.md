@@ -106,6 +106,8 @@ last_reviewed: 2026-10-02
 - [ ] Why does creating multiple `new PrismaClient()` instances crash PostgreSQL with connection starvation, and how does the singleton pattern prevent it?
 - [ ] Why must `prisma migrate dev` NEVER be run in production CI/CD or Docker entrypoint scripts, and what command replaces it?
 - [ ] How does Prisma Client dynamically translate type-safe JavaScript query methods into parameterized raw SQL queries at runtime?
+- [ ] What is the architectural difference between lowercase `prisma` (runtime client instance) and capitalized `Prisma` (compile-time type container), and why does `Prisma` disappear at runtime?
+- [ ] What 4 compile-time protections does typing database queries with `Prisma` provide (column typos, operator mismatches, enum safety, and auto-inferred return shapes)?
 
 ### PostgreSQL & Relational (`database/postgresql/`)
 
