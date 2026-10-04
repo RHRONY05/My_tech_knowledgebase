@@ -3,19 +3,22 @@ tags:
   - active-recall
   - index
   - revision
-last_reviewed: 2026-10-02
+last_reviewed: 2026-10-04
 ---
 
 # Master Active Recall Index
 
 > **How to use this checklist:**  
-> Before opening a note, read the questions below. If you can answer them out loud or on a whiteboard in 60 seconds, your mental model is solid. If you struggle or hesitate, click the link to review the note.
+> Click a pillar to view its topic sub-folders. Click any topic sub-folder to expand its individual study notes and recall questions.  
+> Before opening a note, test yourself on the questions. If you can answer them out loud in 60 seconds, your mental model is solid. If you hesitate, click the link to review the note.
 
 ---
 
-## 🛠️ Backend Architecture
+<details>
+<summary><b style="font-size: 1.25em;">🛠️ Backend Architecture</b></summary>
 
-### Universal Architecture Standards (`backend/architecture/`)
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Universal Architecture Standards</b> (<code>backend/architecture/</code>)</summary>
 
 #### [[backend/architecture/production-backend-5-pillars|The Five Pillars of Production Backend Architecture]]
 - [ ] What are the **5 Non-Negotiable Pillars** of modern production backend engineering?
@@ -24,7 +27,17 @@ last_reviewed: 2026-10-02
 - [ ] How does standardizing `ApiResponse` and `ApiError` envelopes eliminate frontend JSON parsing errors?
 - [ ] What is the "One-Shot Agent Prompt" to scaffold an enterprise backend in seconds?
 
-### Express.js & Node (`backend/express/`)
+#### [[backend/architecture/pagination_and_infinite_scroll|Pagination & Infinite Scroll Feeds: Architecture & Production Mental Model]]
+- [ ] Why does unbounded data fetching (`SELECT * FROM table`) cause Node.js heap exhaustion and client DOM freezes?
+- [ ] What is the mathematical formula for Offset-Based pagination (`skip = (page - 1) * limit`), and why are two parallel queries (`count` + `findMany`) necessary?
+- [ ] What is the "Duplicate Drift Bug" in fast-moving social feeds, and how does Cursor-Based pagination (`cursor: { id }`) eliminate it?
+- [ ] How does pre-fetching with the native browser `IntersectionObserver` create a seamless, spinner-free infinite feed experience?
+- [ ] Why does deep offset pagination (`OFFSET 1000000`) suffer a severe database performance cliff compared to keyset cursors?
+
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Express.js & Node</b> (<code>backend/express/</code> & <code>backend/node/</code>)</summary>
 
 #### [[backend/express/file-upload-pipeline-multer-cloudinary|File Upload Pipeline (Multer + Cloudinary)]]
 - [ ] Why does uploading Base64 strings inside JSON bodies crash Node.js production servers?
@@ -86,7 +99,10 @@ last_reviewed: 2026-10-02
 - [ ] How does the "Fail-Fast" middleware pattern in Express prevent corrupt payloads from reaching database controllers?
 - [ ] Why should API responses return standardized 400 Bad Request error dictionaries rather than unhandled 500 server crashes?
 
-### Automated Testing (`backend/testing/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Automated Testing</b> (<code>backend/testing/</code>)</summary>
 
 #### [[backend/testing/jest-supertest-integration-testing|Automated Backend Integration Testing: Jest, Supertest & Database Teardown]]
 - [ ] Why does Supertest NOT require your Express server to listen on a physical TCP port (`app.listen()`), and how does in-memory request injection work?
@@ -94,11 +110,17 @@ last_reviewed: 2026-10-02
 - [ ] Why does running integration tests concurrently across files break relational database test suites, and how does `--runInBand` guarantee isolation?
 - [ ] How do you mock third-party external services (like Google OAuth or Stripe) without firing live external HTTP requests during tests?
 
+</details>
+
+</details>
+
 ---
 
-## 🗄️ Database & Concurrency Architecture
+<details>
+<summary><b style="font-size: 1.25em;">🗄️ Database & Concurrency Architecture</b></summary>
 
-### Prisma ORM & Data Access (`database/prisma/`)
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Prisma ORM & Data Access</b> (<code>database/prisma/</code>)</summary>
 
 #### [[database/prisma/prisma_fundamentals|Prisma ORM: Architecture, Lifecycle & Production Mind Map]]
 - [ ] What is the exact role difference between `prisma` (devDependencies) and `@prisma/client` (dependencies)?
@@ -109,7 +131,10 @@ last_reviewed: 2026-10-02
 - [ ] What is the architectural difference between lowercase `prisma` (runtime client instance) and capitalized `Prisma` (compile-time type container), and why does `Prisma` disappear at runtime?
 - [ ] What 4 compile-time protections does typing database queries with `Prisma` provide (column typos, operator mismatches, enum safety, and auto-inferred return shapes)?
 
-### PostgreSQL & Relational (`database/postgresql/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 PostgreSQL & Relational</b> (<code>database/postgresql/</code>)</summary>
 
 #### [[database/postgresql/transactions-and-pessimistic-locking|PostgreSQL Concurrency Control: ACID Transactions & Pessimistic Locking (FOR UPDATE)]]
 - [ ] Why does running concurrent queries with `pool.query()` fail for ACID transactions, and why must transactions check out a dedicated client with `pool.connect()`?
@@ -135,11 +160,14 @@ last_reviewed: 2026-10-02
 - [ ] Why must `pg_dump` include the `--clean --if-exists` flags when generating restoration scripts?
 - [ ] What are the 6 essential components of an enterprise-grade automated backup script?
 
-### MongoDB & NoSQL (`database/mongodb/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 MongoDB & NoSQL</b> (<code>database/mongodb/</code>)</summary>
 
 #### [[database/mongodb/mongodb-indexing-strategies|MongoDB Indexing Strategies & Query Optimization]]
 - [ ] What is the execution difference between a `COLLSCAN` (Collection Scan) and an `IXSCAN` (Index Scan) in terms of computational complexity and disk I/O?
-- [ ] How does the B-Tree data structure allow MongoDB to achieve $O(\log n)$ lookup times on indexed fields?
+- [ ] How does the B-Tree data structure allow MongoDB to achieve O(log N) lookup times on indexed fields?
 - [ ] What is the "Equality, Sort, Range" (ESR) rule when designing compound indexes?
 - [ ] Why does adding an index speed up queries but degrade write throughput (`insert`, `update`, `delete`)?
 
@@ -174,7 +202,10 @@ last_reviewed: 2026-10-02
 - [ ] What is MongoDB's strict 16MB BSON document size limit, and how does unbound array growth cause catastrophic write failures?
 - [ ] Why must e-commerce orders denormalize an immutable snapshot of product price and title at the moment of checkout?
 
-### Redis & In-Memory Caching (`database/redis/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Redis & In-Memory Caching</b> (<code>database/redis/</code>)</summary>
 
 #### [[database/redis/redis-architecture-caching-and-ttl|Redis Architecture: Sub-Millisecond Caching, TTL & Multi-Container Orchestration]]
 - [ ] Why does storing ephemeral data (e.g. AI chat sessions, rate limits) in PostgreSQL cause disk I/O bottlenecks compared to Redis?
@@ -183,7 +214,10 @@ last_reviewed: 2026-10-02
 - [ ] In Docker Compose, why can containers communicate via service names (`redis:6379`) while the host connects via `localhost:6379`?
 - [ ] Why does vector similarity search for AI embeddings require `pgvector/pgvector:pg16` instead of standard `postgres:16`?
 
-### pgvector & AI Embeddings (`database/pgvector/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 pgvector & AI Embeddings</b> (<code>database/pgvector/</code>)</summary>
 
 #### [[database/pgvector/vector_embeddings_and_search|Vector Embeddings & Semantic Search: Production Cheat Sheet & Mental Model]]
 - [ ] Why does traditional SQL keyword search (`ILIKE '%red%'`) fail when users search with natural, descriptive language?
@@ -194,11 +228,17 @@ last_reviewed: 2026-10-02
 - [ ] What is an HNSW index, and what happens to search performance without one on a large dataset?
 - [ ] When a user sends a long prompt to ChatGPT, does the entire prompt become one vector or is it processed differently?
 
+</details>
+
+</details>
+
 ---
 
-## 🐳 DevOps & Infrastructure
+<details>
+<summary><b style="font-size: 1.25em;">🐳 DevOps & Infrastructure</b></summary>
 
-### Docker & Containers (`devops/docker/`)
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Docker & Containers</b> (<code>devops/docker/</code>)</summary>
 
 #### [[devops/docker/docker-core-and-networking|Docker Core Architecture, Container Anatomy & Bridge Networking]]
 - [ ] Why is a Docker container NOT a Virtual Machine (VM), and what two Linux kernel primitives (Namespaces vs. Cgroups) make containerization possible?
@@ -218,7 +258,10 @@ last_reviewed: 2026-10-02
 - [ ] What is the fundamental difference between a **Named Volume** (`pgdata:/var/lib/postgresql/data`) and a **Bind Mount** (`./src:/app/src`)?
 - [ ] Why should database migrations run as a dedicated **One-Shot Task** before backend services boot?
 
-### Nginx & Web Serving (`devops/nginx/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Nginx & Web Serving</b> (<code>devops/nginx/</code>)</summary>
 
 #### [[devops/nginx/nginx-reverse-proxy-and-spa-routing|Nginx Production Web Architecture: Reverse Proxying & SPA Routing]]
 - [ ] Why does refreshing the browser on a React client-side route like `/movies/seat-selection` return a 404 Not Found error without Nginx's `try_files` directive?
@@ -226,7 +269,10 @@ last_reviewed: 2026-10-02
 - [ ] Why can static production assets (`dist/assets/*.js`) be cached with a 1-year `Cache-Control: max-age=31536000, immutable` header, while `index.html` must never be cached?
 - [ ] What critical HTTP headers (`X-Real-IP`, `X-Forwarded-For`, `X-Forwarded-Proto`) must Nginx pass when forwarding `/api/` traffic to Express?
 
-### Security & SSL/TLS (`devops/security/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Security & SSL/TLS</b> (<code>devops/security/</code>)</summary>
 
 #### [[devops/security/ssl-tls-and-certbot|SSL/TLS Architecture, Public-Key Cryptography & Certbot Deep-Dive]]
 - [ ] What are the three foundational vulnerabilities of plain unencrypted HTTP that TLS (HTTPS) resolves?
@@ -234,7 +280,10 @@ last_reviewed: 2026-10-02
 - [ ] How does the Let's Encrypt **ACME HTTP-01 Challenge** mathematically prove domain ownership to issue a signed certificate?
 - [ ] Why must Let's Encrypt certificates be renewed every 90 days, and how does a Certbot cron / systemd timer automate this?
 
-### Cloud Deployment (`devops/deployment/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Cloud Deployment</b> (<code>devops/deployment/</code>)</summary>
 
 #### [[devops/deployment/self-hosted-vps-vs-paas|Production Cloud Deployment: Self-Hosted Linux VPS vs. Managed PaaS]]
 - [ ] Why does a 1 GB RAM Linux VPS crash during `docker compose build`, and how does allocating a **2 GB Swap file with `vm.swappiness=10`** prevent Out-Of-Memory (OOM) kernel panics?
@@ -242,7 +291,10 @@ last_reviewed: 2026-10-02
 - [ ] How does Uncomplicated Firewall (UFW) enforce the security perimeter on a production VPS, and why must database port 5432 remain closed?
 - [ ] Why does Windows reject SSH private keys until permissions are stripped using `icacls`, and what is the Linux equivalent (`chmod 600`)?
 
-### CI/CD Pipelines (`devops/ci-cd/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 CI/CD Pipelines</b> (<code>devops/ci-cd/</code>)</summary>
 
 #### [[devops/ci-cd/github-actions-ci-pipeline|Continuous Integration (CI) with GitHub Actions: Sterile Runners & Service Containers]]
 - [ ] If a developer already runs `npm test` locally on their laptop, what three critical failure modes (e.g. "Forgotten File" trap, Windows case-insensitivity) make cloud CI mandatory?
@@ -250,11 +302,17 @@ last_reviewed: 2026-10-02
 - [ ] What is the difference between running tests against a "dirty" developer laptop vs. a 100% "sterile" cloud virtual machine runner?
 - [ ] How does `actions/cache` optimize CI pipeline execution times by preserving `node_modules` based on `package-lock.json` hash keys?
 
+</details>
+
+</details>
+
 ---
 
-## 🎨 Frontend Architecture
+<details>
+<summary><b style="font-size: 1.25em;">🎨 Frontend Architecture</b></summary>
 
-### React (`frontend/react/`)
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 React & Client Routing</b> (<code>frontend/react/</code>)</summary>
 
 #### [[frontend/react/react-router-v6-architecture|React Router v6 Architecture: Layouts, Outlets & Nested Routing]]
 - [ ] How does React Router v6's `<Outlet />` component work internally to enable shared persistent layouts across sub-routes?
@@ -274,7 +332,10 @@ last_reviewed: 2026-10-02
 - [ ] What is the role of `<Controller />`, and why is it necessary for custom UI components (Shadcn UI, Radix Select, DatePickers)?
 - [ ] How does `useFieldArray` manage dynamic arrays of inputs (e.g. adding/removing product variants) without losing user input on re-render?
 
-### Redux Toolkit (`frontend/redux/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Redux Toolkit & Global State</b> (<code>frontend/redux/</code>)</summary>
 
 #### [[frontend/redux/redux-toolkit-core-architecture-and-dataflow|Redux Toolkit (RTK) Core Architecture & Unidirectional Dataflow]]
 - [ ] What is the exact sequence of events in the Redux unidirectional dataflow from user click to component re-render?
@@ -296,7 +357,10 @@ last_reviewed: 2026-10-02
 - [ ] What is the "Envelope Mismatch" bug when a backend returns `ApiResponse { statusCode, data, message }` and Axios wraps it in `response.data`?
 - [ ] How does `thunkAPI.rejectWithValue` prevent non-serializable Axios error objects from polluting the Redux DevTools?
 
-### Frontend Tooling (`frontend/tooling/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Frontend Tooling & Quality</b> (<code>frontend/tooling/</code>)</summary>
 
 #### [[frontend/tooling/code-quality-linters-oxlint|Modern Frontend Code Quality: The 4 Layers & Rust-Based Linters (Oxlint)]]
 - [ ] What are the **4 distinct layers** of frontend code quality, and what specific role does each tool (Compiler, Type Checker, Formatter, Linter) perform?
@@ -304,11 +368,17 @@ last_reviewed: 2026-10-02
 - [ ] What catastrophic runtime bugs does the `react/rules-of-hooks` lint rule prevent?
 - [ ] Why does exporting non-component constants from a React component file break Vite's Fast Refresh (Hot Module Reloading)?
 
+</details>
+
+</details>
+
 ---
 
-## 🔷 TypeScript & Runtime Safety
+<details>
+<summary><b style="font-size: 1.25em;">🔷 TypeScript & Runtime Safety</b></summary>
 
-### 1. TypeScript Core Fundamentals
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 TypeScript Core Fundamentals</b> (<code>typescript/core/typescript_basics.md</code>)</summary>
 
 #### Topics to Recall:
 1. **Static Typing vs. Dynamic Typing:** Compile-time check (`tsc`) vs. runtime evaluation (V8 / Node.js).
@@ -328,20 +398,24 @@ last_reviewed: 2026-10-02
 
 👉 **Detailed Study Note:** [[typescript/core/typescript_basics|typescript_basics.md]]
 
----
+</details>
 
-### 2. TypeScript Compilation & Multi-tsconfig Architecture
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 TypeScript Compilation & Multi-tsconfig Architecture</b> (<code>typescript/core/tsconfig_conecpts.md</code>)</summary>
 
 #### Topics to Recall:
 1. **No Runtime Execution:** Why neither Node.js nor web browsers execute TypeScript directly; all code must become plain JS.
 2. **Backend vs. Frontend Conversion:** Why `tsc` emits `dist/*.js` for backend, while Vite bundles `dist/` and `tsc` only type-checks (`noEmit: true`) for frontend.
 3. **`tsc` In-Memory Checking vs Type Erasure:** Why types stay active in AST memory during checking and are erased only during code emission.
 4. **Why Multiple Configs:** Why backend needs only 1 `tsconfig.json`, while frontend requires 3 files (`tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`) to isolate Browser DOM from Node.js build scripts.
-5. **The 3 Error Watchers Timeline:** Editor Language Server (`tsserver`) while typing $\rightarrow$ Vite Dev Server (`esbuild`) during dev $\rightarrow$ `tsc -b` during production build.
+5. **The 3 Error Watchers Timeline:** Editor Language Server (`tsserver`) while typing -> Vite Dev Server (`esbuild`) during dev -> `tsc -b` during production build.
 
 👉 **Detailed Study Note:** [[typescript/core/tsconfig_conecpts|tsconfig_conecpts.md]]
 
-### Zod (`typescript/zod/`)
+</details>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Zod Runtime Schema Validation</b> (<code>typescript/zod/</code>)</summary>
 
 #### [[typescript/zod/zod-schema-validation|Zod Runtime Schema Validation & Static Type Inference]]
 - [ ] Why does TypeScript's static type system vanish at runtime (type erasure), and why is Zod required to validate external boundaries (API responses, forms)?
@@ -349,9 +423,21 @@ last_reviewed: 2026-10-02
 - [ ] What is the difference between `.refine()` and `.transform()` in a Zod validation chain?
 - [ ] Why should you prefer `schema.safeParse(data)` over `schema.parse(data)` when building production backend API middlewares or services?
 
+</details>
+
+</details>
+
 ---
 
-## 🧭 Active Recall Deep-Dives & Roadmaps
+<details>
+<summary><b style="font-size: 1.25em;">🧭 Active Recall Deep-Dives & Roadmaps</b></summary>
+
+<details style="margin-left: 16px; margin-top: 10px; margin-bottom: 10px;">
+<summary><b>📁 Comprehensive Q&A Guides & Scalability Roadmaps</b> (<code>00-active-recall/</code>)</summary>
 
 - [[00-active-recall/backend-docker-qna|Backend, Database & Docker Mastery — Active Recall Q&A Guide (With Collapsible Answers)]]
 - [[00-active-recall/system-design-scale-lab-roadmap|Future Project Blueprint: High-Throughput Distributed Systems & Scale Lab]]
+
+</details>
+
+</details>
